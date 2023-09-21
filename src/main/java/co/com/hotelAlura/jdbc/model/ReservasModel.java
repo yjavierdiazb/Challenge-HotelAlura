@@ -1,17 +1,17 @@
 package co.com.hotelAlura.jdbc.model;
 import java.util.Date;
 
-public class ReservasView {
+public class ReservasModel {
     private int id;
     private Date fechaEntrada;
     private Date fechaSalida;
     private double valor;
     private String formaPago;
 
-    public ReservasView() {
+    public ReservasModel() {
     }
 
-    public ReservasView(Date fechaEntrada, Date fechaSalida, double valor, String formaPago) {
+    public ReservasModel(Date fechaEntrada, Date fechaSalida, double valor, String formaPago) {
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
         this.valor = valor;

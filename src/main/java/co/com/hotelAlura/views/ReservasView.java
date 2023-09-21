@@ -3,6 +3,8 @@ package co.com.hotelAlura.views;
 import co.com.hotelAlura.jdbc.factory.ConnectionFactory;
 import co.com.hotelAlura.jdbc.controller.ReservaController;
 import co.com.hotelAlura.jdbc.dao.ReservaDAO;
+import co.com.hotelAlura.views.RegistroHuesped;
+
 
 import java.sql.SQLException;
 import java.sql.Date;
@@ -306,6 +308,8 @@ public class ReservasView extends JFrame {
 		txtFormaPago.setModel(new DefaultComboBoxModel(new String[]{"Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo"}));
 		panel.add(txtFormaPago);
 
+		//ESTA ES LA PARTE DE LA LOGICA
+
 		JPanel btnsiguiente = new JPanel();
 		btnsiguiente.add(lblSiguiente);
 		btnsiguiente.addMouseListener(new MouseAdapter() {
@@ -325,6 +329,10 @@ public class ReservasView extends JFrame {
 						long dias = (fechaSalida.getTime() - fechaEntrada.getTime()) / (24 * 60 * 60 * 1000);
 						double valorReserva = dias * valorDiaria;
 						reservaController.realizarReserva(fechaEntrada,fechaSalida,valorReserva,formaPago);
+						int numeroReserva = reservaController.obtenerYMostrarUltimoNumeroReserva();
+						RegistroHuesped registroHuesped = new RegistroHuesped(numeroReserva);
+						registroHuesped.setVisible(true);
+						dispose();
 					}catch(NumberFormatException en)
 					{
 					en.printStackTrace();
@@ -342,6 +350,10 @@ public class ReservasView extends JFrame {
 		panel.add(btnsiguiente);
 		btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 	}
+
+
+	//AQUI TERMINA LA LOGICA
+
 
 	// Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
 	private void headerMousePressed(java.awt.event.MouseEvent evt) {

@@ -1,11 +1,14 @@
 package co.com.hotelAlura.views;
 
+import co.com.hotelAlura.jdbc.controller.ReservaController;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Color;
+
+import co.com.hotelAlura.jdbc.dao.ReservaDAO;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -37,6 +40,7 @@ public class RegistroHuesped extends JFrame {
 	private JComboBox<Format> txtNacionalidad;
 	private JLabel labelExit;
 	private JLabel labelAtras;
+	private int numeroReserva;
 	int xMouse, yMouse;
 
 	/**
@@ -46,20 +50,38 @@ public class RegistroHuesped extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistroHuesped frame = new RegistroHuesped();
-					frame.setVisible(true);
+					// Crear una instancia de ReservaDAO
+					ReservaDAO reservaDAO = new ReservaDAO();
+
+					// Crear una instancia de ReservaController pasando la instancia de ReservaDAO
+					ReservaController reservaController = new ReservaController(reservaDAO);
+
+					// Obtener el último número de reserva
+					int ultimoNumeroReserva = reservaController.obtenerYMostrarUltimoNumeroReserva();
+
+					// Verificar si se pudo obtener el último número de reserva
+					if (ultimoNumeroReserva != -1) {
+						// Crear una instancia de RegistroHuesped pasando el último número de reserva
+						RegistroHuesped frame = new RegistroHuesped(ultimoNumeroReserva);
+						frame.setVisible(true);
+					} else {
+						// Manejar el caso en que no se pudo obtener el último número de reserva
+						System.out.println("No se pudo obtener el último número de reserva.");
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+
 		});
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public RegistroHuesped() {
-		
+	public RegistroHuesped(int numeroReserva) {
+
+		this.numeroReserva = numeroReserva;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroHuesped.class.getResource("/imagenes/lOGO-50PX.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 634);
@@ -70,7 +92,6 @@ public class RegistroHuesped extends JFrame {
 		setLocationRelativeTo(null);
 		setUndecorated(true);
 		contentPane.setLayout(null);
-		
 		JPanel header = new JPanel();
 		header.setBounds(0, 0, 910, 36);
 		header.addMouseMotionListener(new MouseMotionAdapter() {
@@ -79,7 +100,8 @@ public class RegistroHuesped extends JFrame {
 				headerMouseDragged(e);
 			     
 			}
-		});
+		}
+		);
 		header.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -210,6 +232,9 @@ public class RegistroHuesped extends JFrame {
 		txtNreserva.setColumns(10);
 		txtNreserva.setBackground(Color.WHITE);
 		txtNreserva.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		//Establece el texto de txtNreserva después de inicializado
+		txtNreserva.setText(String.valueOf(numeroReserva));
+		txtNreserva.setEnabled(false);
 		contentPane.add(txtNreserva);
 		
 		JSeparator separator_1_2 = new JSeparator();
