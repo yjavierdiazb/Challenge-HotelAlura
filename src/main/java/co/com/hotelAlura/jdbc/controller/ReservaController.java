@@ -6,6 +6,7 @@ import co.com.hotelAlura.views.RegistroHuesped;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,19 @@ public class ReservaController {
 
         return reservas;
     }
+
+    public List<ReservasModel> traerReservasFiltro(int id) {
+        ReservaDAO reservaDAO = new ReservaDAO();
+        List<ReservasModel> reservas = new ArrayList<>();
+        try {
+            reservas = reservaDAO.obtenerReservasFiltro(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservas;
+    }
+
 
     public int obtenerYMostrarUltimoNumeroReserva() {
         try {

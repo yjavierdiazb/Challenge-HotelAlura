@@ -66,6 +66,29 @@ public class ReservaDAO {
     return reservas;
     }
 
+    public List<ReservasModel> obtenerReservasFiltro(int id) throws SQLException{
+        String sql = "SELECT * FROM reservas WHERE id = ?";
+        List<ReservasModel> reservas = new ArrayList<>();
+        try(Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql)){
+            statement.setInt(1,id);
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()) {
+                    ReservasModel reserva = new ReservasModel();
+                    reserva.setId(resultSet.getInt("id"));
+                    reserva.setFechaEntrada(resultSet.getDate("fecha_entrada"));
+                    reserva.setFechaSalida(resultSet.getDate("fecha_salida"));
+                    reserva.setValor(resultSet.getDouble("valor"));
+                    reserva.setFormaPago(resultSet.getString("forma_de_pago"));
+                    reservas.add(reserva);
+                }
+            }
+        }
+        return reservas;
+    }
+
+
+
     public void eliminarReserva(ReservasModel reservasModel) throws SQLException{
         String sql = "DELETE FROM reservas WHERE id = ?";
         try (Connection conn = ConnectionFactory.getConnection();
