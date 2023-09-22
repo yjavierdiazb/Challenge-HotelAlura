@@ -53,4 +53,8 @@ public class ReservasModel {
     public void setFormaPago(String formaPago) {
         this.formaPago = formaPago;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

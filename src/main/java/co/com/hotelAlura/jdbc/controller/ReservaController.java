@@ -7,6 +7,7 @@ import co.com.hotelAlura.views.RegistroHuesped;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public class ReservaController {
     private ReservaDAO reservaDAO;
@@ -22,6 +23,18 @@ public class ReservaController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public List<ReservasModel> traerTodasReservas(){
+        List<ReservasModel> reservas = null;
+        try{
+            reservas = reservaDAO.obtenerTodasReservas();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return reservas;
     }
 
     public int obtenerYMostrarUltimoNumeroReserva() {
