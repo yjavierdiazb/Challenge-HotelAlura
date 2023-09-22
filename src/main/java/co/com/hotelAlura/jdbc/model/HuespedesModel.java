@@ -12,8 +12,7 @@ public class HuespedesModel {
     public HuespedesModel() {
     }
 
-    public HuespedesModel(int id, String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono) {
-        this.id = id;
+    public HuespedesModel(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
