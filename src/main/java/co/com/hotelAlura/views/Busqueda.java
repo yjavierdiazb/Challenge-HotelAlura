@@ -1,27 +1,16 @@
 package co.com.hotelAlura.views;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.SystemColor;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -217,8 +206,32 @@ public class Busqueda extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				int selectedTabIndex = panel.getSelectedIndex(); // Obtener el índice de la pestaña seleccionada
+
+				if (selectedTabIndex == 0) {
+					JOptionPane.showMessageDialog(null,"Consultas por Reserva en Desarrollo");
+					if(txtBuscar.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null,"Esta vacio");
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"El numero introducido es: " + txtBuscar.getText());
+					}
+
+				} else if (selectedTabIndex == 1) {
+					JOptionPane.showMessageDialog(null,"Consultas por Huesped en Desarrollo");
+					if (txtBuscar.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null,"Debe ingresar un huesped");
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"El huesped introducido es: " + txtBuscar.getText());
+					}
+				}
+
 			}
 		});
+
+
+
 		btnbuscar.setLayout(null);
 		btnbuscar.setBackground(new Color(12, 138, 199));
 		btnbuscar.setBounds(748, 125, 122, 35);
