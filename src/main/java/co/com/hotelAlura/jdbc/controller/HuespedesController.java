@@ -11,9 +11,9 @@ public class HuespedesController {
 
     public HuespedesController(HuespedesDAO huespedesDAO){this.huespedesDAO = huespedesDAO;}
 
-    public void realizarRegistroHuesped(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono ){
+    public void realizarRegistroHuesped(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono, int id_reserva){
         try{
-            HuespedesModel huespedesModel = new HuespedesModel(nombre, apellido, fecha_nacimiento, nacionalidad, telefono);
+            HuespedesModel huespedesModel = new HuespedesModel(nombre, apellido, fecha_nacimiento, nacionalidad, telefono, id_reserva);
             huespedesDAO.agregarHuesped(huespedesModel);
         }   catch (SQLException e){
             e.printStackTrace();

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class HuespedesDAO {
 
     public void agregarHuesped(HuespedesModel huespedesModel) throws SQLException{
-        String sql = "INSERT INTO huespedes (nombre, apellido, fecha_nacimiento, nacionalidad, telefono) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO huespedes (nombre, apellido, fecha_nacimiento, nacionalidad, telefono, id_reserva) VALUES (?, ?, ?, ?, ?, ?)";
 
         try(Connection conn = ConnectionFactory.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql)){
@@ -18,6 +18,7 @@ public class HuespedesDAO {
             statement.setDate(3, new java.sql.Date(huespedesModel.getFecha_nacimiento().getTime()));
             statement.setString(4,huespedesModel.getNacionalidad());
             statement.setInt(5,huespedesModel.getTelefono());
+            statement.setInt(6,huespedesModel.getId_reserva());
 
             statement.executeUpdate();
         }   catch (SQLException e){

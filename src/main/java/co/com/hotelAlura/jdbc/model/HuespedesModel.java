@@ -9,19 +9,26 @@ public class HuespedesModel {
     private String nacionalidad;
     private int telefono;
 
+    private int id_reserva;
+
     public HuespedesModel() {
     }
 
-    public HuespedesModel(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono) {
+    public HuespedesModel(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono, int id_reserva){
         this.nombre = nombre;
         this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
         this.nacionalidad = nacionalidad;
         this.telefono = telefono;
+        this.id_reserva = id_reserva;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getId_reserva(){
+        return id_reserva;
     }
 
     public String getNombre() {
