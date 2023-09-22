@@ -1,5 +1,9 @@
 package co.com.hotelAlura.views;
 
+import co.com.hotelAlura.jdbc.controller.ReservaController;
+import co.com.hotelAlura.jdbc.model.ReservasModel;
+import co.com.hotelAlura.jdbc.dao.ReservaDAO;
+
 import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +18,8 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class Busqueda extends JFrame {
@@ -209,9 +215,33 @@ public class Busqueda extends JFrame {
 				int selectedTabIndex = panel.getSelectedIndex(); // Obtener el índice de la pestaña seleccionada
 
 				if (selectedTabIndex == 0) {
-					JOptionPane.showMessageDialog(null,"Consultas por Reserva en Desarrollo");
 					if(txtBuscar.getText().isEmpty()){
-						JOptionPane.showMessageDialog(null,"Esta vacio");
+
+						// Crear una instancia de ReservaController
+						ReservaController reservaController = new ReservaController(new ReservaDAO());
+
+						// Llamar al método traerTodasReservas() en la instancia
+						List<ReservasModel> reservas = reservaController.traerTodasReservas();
+
+						DefaultTableModel modeloReservas = (DefaultTableModel) tbReservas.getModel();
+						modeloReservas.setRowCount(0); //limpia todas las filas
+						//Rellenamos
+						for(ReservasModel reserva : reservas){
+							modeloReservas.addRow(new Object[]{
+									reserva.getId(),
+									reserva.getFechaEntrada(),
+									reserva.getFechaSalida(),
+									reserva.getValor(),
+									reserva.getFormaPago()
+							});
+						}
+
+
+
+
+
+
+
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"El numero introducido es: " + txtBuscar.getText());
