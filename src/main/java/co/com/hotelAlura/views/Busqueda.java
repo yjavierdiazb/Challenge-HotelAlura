@@ -238,8 +238,6 @@ public class Busqueda extends JFrame {
 
 					}
 					else {
-						JOptionPane.showMessageDialog(null,"El numero introducido es: " + txtBuscar.getText());
-
 						// Crear una instancia de ReservaController
 						ReservaController reservaController = new ReservaController(new ReservaDAO());
 
