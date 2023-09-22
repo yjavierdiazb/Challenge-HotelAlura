@@ -1,5 +1,6 @@
 package co.com.hotelAlura.views;
 
+import co.com.hotelAlura.jdbc.controller.HuespedesController;
 import co.com.hotelAlura.jdbc.controller.ReservaController;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -8,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Color;
 
+import co.com.hotelAlura.jdbc.dao.HuespedesDAO;
 import co.com.hotelAlura.jdbc.dao.ReservaDAO;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
@@ -25,6 +27,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.text.Format;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 
@@ -272,14 +275,39 @@ public class RegistroHuesped extends JFrame {
 		separator_1_2_5.setForeground(new Color(12, 138, 199));
 		separator_1_2_5.setBackground(new Color(12, 138, 199));
 		contentPane.add(separator_1_2_5);
-		
+
+
+
 		JPanel btnguardar = new JPanel();
 		btnguardar.setBounds(723, 560, 122, 35);
 		btnguardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//Añadimos el codigo para poder ejecutar las funciones de mi huespedes controller
+
+				String nombre = txtNombre.getText();
+				String apellido = txtApellido.getText();
+				Date fecha_nacimiento = txtFechaN.getDate();
+				String nacionalidad = (String) txtNacionalidad.getSelectedItem();
+				int telefono = Integer.parseInt(txtTelefono.getText());
+				int id_reserva = Integer.parseInt(txtNreserva.getText());
+
+				//Creamos la instancia de HuespedesController
+
+				HuespedesController huespedesController = new HuespedesController(new HuespedesDAO());
+
+				//Llamamos al método para realizar el registro del huesped
+
+				huespedesController.realizarRegistroHuesped(nombre, apellido, fecha_nacimiento,nacionalidad,telefono,id_reserva);
+
+				//Mensaje de confirmacion
+
+				JOptionPane.showMessageDialog(null, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
+
+
+
 		btnguardar.setLayout(null);
 		btnguardar.setBackground(new Color(12, 138, 199));
 		contentPane.add(btnguardar);
