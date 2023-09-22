@@ -289,7 +289,7 @@ public class RegistroHuesped extends JFrame {
 				String apellido = txtApellido.getText();
 				Date fecha_nacimiento = txtFechaN.getDate();
 				String nacionalidad = (String) txtNacionalidad.getSelectedItem();
-				int telefono = Integer.parseInt(txtTelefono.getText());
+				String telefono = txtTelefono.getText();
 				int id_reserva = Integer.parseInt(txtNreserva.getText());
 
 				//Creamos la instancia de HuespedesController

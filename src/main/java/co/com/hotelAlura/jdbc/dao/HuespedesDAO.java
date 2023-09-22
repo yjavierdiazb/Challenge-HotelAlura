@@ -17,7 +17,7 @@ public class HuespedesDAO {
             statement.setString(2, huespedesModel.getApellido());
             statement.setDate(3, new java.sql.Date(huespedesModel.getFecha_nacimiento().getTime()));
             statement.setString(4,huespedesModel.getNacionalidad());
-            statement.setInt(5,huespedesModel.getTelefono());
+            statement.setString(5, huespedesModel.getTelefono());
             statement.setInt(6,huespedesModel.getId_reserva());
 
             statement.executeUpdate();

@@ -7,14 +7,14 @@ public class HuespedesModel {
     private String apellido;
     private Date fecha_nacimiento;
     private String nacionalidad;
-    private int telefono;
+    private String telefono;
 
     private int id_reserva;
 
     public HuespedesModel() {
     }
 
-    public HuespedesModel(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, int telefono, int id_reserva){
+    public HuespedesModel(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, String telefono, int id_reserva){
         this.nombre = nombre;
         this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
@@ -47,7 +47,7 @@ public class HuespedesModel {
         return nacionalidad;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -71,7 +71,7 @@ public class HuespedesModel {
         this.nacionalidad = nacionalidad;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 }
