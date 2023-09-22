@@ -303,6 +303,13 @@ public class RegistroHuesped extends JFrame {
 				//Mensaje de confirmacion
 
 				JOptionPane.showMessageDialog(null, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+				//Creamos la instancia para volver al menu principal
+
+				dispose(); //Cierra la ventana actual
+
+				MenuPrincipal menuPrincipal = new MenuPrincipal();
+				menuPrincipal.setVisible(true);
 			}
 		});
 
