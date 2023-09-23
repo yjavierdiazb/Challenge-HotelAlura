@@ -10,7 +10,6 @@ public class ReservasModel {
 
     public ReservasModel() {
     }
-
     public ReservasModel(Date fechaEntrada, Date fechaSalida, double valor, String formaPago) {
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;

@@ -13,7 +13,6 @@ public class HuespedesModel {
 
     public HuespedesModel() {
     }
-
     public HuespedesModel(String nombre, String apellido, Date fecha_nacimiento, String nacionalidad, String telefono, int id_reserva){
         this.nombre = nombre;
         this.apellido = apellido;

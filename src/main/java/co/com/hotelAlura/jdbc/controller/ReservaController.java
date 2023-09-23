@@ -46,7 +46,6 @@ public class ReservaController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return reservas;
     }
 

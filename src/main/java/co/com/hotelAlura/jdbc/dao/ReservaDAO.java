@@ -89,8 +89,6 @@ public class ReservaDAO {
     }
 
 
-
-
     public void eliminarReserva(ReservasModel reservasModel) throws SQLException{
         String sql = "DELETE FROM reservas WHERE id = ?";
         try (Connection conn = ConnectionFactory.getConnection();

@@ -55,7 +55,6 @@ public class HuespedesDAO {
         }
         return huespedes;
     }
-
     public List<HuespedesModel> obtenerHuespedesFiltro(int id) throws SQLException{
         String sql = "SELECT * FROM huespedes WHERE id = ?";
         List<HuespedesModel> huespedes = new ArrayList<>();
