@@ -212,7 +212,7 @@ public class Busqueda extends JFrame {
 		separator_1_2.setBackground(new Color(12, 138, 199));
 		separator_1_2.setBounds(539, 159, 193, 2);
 		contentPane.add(separator_1_2);
-		
+
 		JPanel btnbuscar = new JPanel();
 		btnbuscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -221,7 +221,7 @@ public class Busqueda extends JFrame {
 				int selectedTabIndex = panel.getSelectedIndex(); // Obtener el índice de la pestaña seleccionada
 
 				if (selectedTabIndex == 0) {
-					if(txtBuscar.getText().isEmpty()){
+					if (txtBuscar.getText().isEmpty()) {
 
 						// Crear una instancia de ReservaController
 						ReservaController reservaController = new ReservaController(new ReservaDAO());
@@ -230,9 +230,9 @@ public class Busqueda extends JFrame {
 						List<ReservasModel> reservas = reservaController.traerTodasReservas();
 
 						DefaultTableModel modeloReservas = (DefaultTableModel) tbReservas.getModel();
-						modeloReservas.setRowCount(0); //limpia todas las filas
-						//Rellenamos
-						for(ReservasModel reserva : reservas){
+						modeloReservas.setRowCount(0); // limpia todas las filas
+						// Rellenamos
+						for (ReservasModel reserva : reservas) {
 							modeloReservas.addRow(new Object[]{
 									reserva.getId(),
 									reserva.getFechaEntrada(),
@@ -242,8 +242,7 @@ public class Busqueda extends JFrame {
 							});
 						}
 
-					}
-					else {
+					} else {
 						// Crear una instancia de ReservaController
 						ReservaController reservaController = new ReservaController(new ReservaDAO());
 
@@ -252,9 +251,9 @@ public class Busqueda extends JFrame {
 						List<ReservasModel> reservas = reservaController.traerReservasFiltro(id);
 
 						DefaultTableModel modeloReservas = (DefaultTableModel) tbReservas.getModel();
-						modeloReservas.setRowCount(0); //limpia todas las filas
-						//Rellenamos
-						for(ReservasModel reserva : reservas){
+						modeloReservas.setRowCount(0); // limpia todas las filas
+						// Rellenamos
+						for (ReservasModel reserva : reservas) {
 							modeloReservas.addRow(new Object[]{
 									reserva.getId(),
 									reserva.getFechaEntrada(),
@@ -267,6 +266,24 @@ public class Busqueda extends JFrame {
 
 				} else if (selectedTabIndex == 1) {
 					if (txtBuscar.getText().isEmpty()) {
+						// Configurar la tabla de huéspedes si aún no está configurada
+						if (tbHuespedes == null) {
+							tbHuespedes = new JTable();
+							tbHuespedes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+							tbHuespedes.setFont(new Font("Roboto", Font.PLAIN, 16));
+							modeloHuesped = (DefaultTableModel) tbHuespedes.getModel();
+							modeloHuesped.addColumn("Número de Huesped");
+							modeloHuesped.addColumn("Nombre");
+							modeloHuesped.addColumn("Apellido");
+							modeloHuesped.addColumn("Fecha de Nacimiento");
+							modeloHuesped.addColumn("Nacionalidad");
+							modeloHuesped.addColumn("Teléfono");
+							modeloHuesped.addColumn("Número de Reserva");
+
+							// Habilitar la edición directa en las celdas de la tabla
+							tbHuespedes.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()));
+						}
+
 						// Crear una instancia de HuespedesController
 						HuespedesController huespedesController = new HuespedesController(new HuespedesDAO());
 
@@ -274,9 +291,9 @@ public class Busqueda extends JFrame {
 						List<HuespedesModel> huespedes = huespedesController.traerTodosHuespedes();
 
 						DefaultTableModel modeloHuespedes = (DefaultTableModel) tbHuespedes.getModel();
-						modeloHuespedes.setRowCount(0); //limpia todas las filas
-						//Rellenamos
-						for(HuespedesModel huesped : huespedes){
+						modeloHuespedes.setRowCount(0); // limpia todas las filas
+						// Rellenamos
+						for (HuespedesModel huesped : huespedes) {
 							modeloHuespedes.addRow(new Object[]{
 									huesped.getId(),
 									huesped.getNombre(),
@@ -287,8 +304,8 @@ public class Busqueda extends JFrame {
 									huesped.getId_reserva()
 							});
 						}
-					}
-					else{
+
+					} else {
 						// Crear una instancia de HuespedesController
 						HuespedesController huespedesController = new HuespedesController(new HuespedesDAO());
 
@@ -297,9 +314,9 @@ public class Busqueda extends JFrame {
 						List<HuespedesModel> huespedes = huespedesController.traerHuespedesFiltro(id);
 
 						DefaultTableModel modeloHuespedes = (DefaultTableModel) tbHuespedes.getModel();
-						modeloHuespedes.setRowCount(0); //limpia todas las filas
-						//Rellenamos
-						for(HuespedesModel huesped : huespedes){
+						modeloHuespedes.setRowCount(0); // limpia todas las filas
+						// Rellenamos
+						for (HuespedesModel huesped : huespedes) {
 							modeloHuespedes.addRow(new Object[]{
 									huesped.getId(),
 									huesped.getNombre(),
@@ -310,12 +327,12 @@ public class Busqueda extends JFrame {
 									huesped.getId_reserva()
 							});
 						}
-
 					}
 				}
-
 			}
 		});
+
+
 
 		btnbuscar.setLayout(null);
 		btnbuscar.setBackground(new Color(12, 138, 199));
