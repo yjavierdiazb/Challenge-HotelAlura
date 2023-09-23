@@ -1,6 +1,9 @@
 package co.com.hotelAlura.views;
 
+import co.com.hotelAlura.jdbc.controller.HuespedesController;
 import co.com.hotelAlura.jdbc.controller.ReservaController;
+import co.com.hotelAlura.jdbc.dao.HuespedesDAO;
+import co.com.hotelAlura.jdbc.model.HuespedesModel;
 import co.com.hotelAlura.jdbc.model.ReservasModel;
 import co.com.hotelAlura.jdbc.dao.ReservaDAO;
 
@@ -260,9 +263,27 @@ public class Busqueda extends JFrame {
 					}
 
 				} else if (selectedTabIndex == 1) {
-					JOptionPane.showMessageDialog(null,"Consultas por Huesped en Desarrollo");
 					if (txtBuscar.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null,"Debe ingresar un huesped");
+						// Crear una instancia de HuespedesController
+						HuespedesController huespedesController = new HuespedesController(new HuespedesDAO());
+
+						// Llamar al método traerTodosHuespedes() en la instancia
+						List<HuespedesModel> huespedes = huespedesController.traerTodosHuespedes();
+
+						DefaultTableModel modeloHuespedes = (DefaultTableModel) tbHuespedes.getModel();
+						modeloHuespedes.setRowCount(0); //limpia todas las filas
+						//Rellenamos
+						for(HuespedesModel huesped : huespedes){
+							modeloHuespedes.addRow(new Object[]{
+									huesped.getId(),
+									huesped.getNombre(),
+									huesped.getApellido(),
+									huesped.getFecha_nacimiento(),
+									huesped.getNacionalidad(),
+									huesped.getTelefono(),
+									huesped.getId_reserva()
+							});
+						}
 					}
 					else{
 						JOptionPane.showMessageDialog(null,"El huesped introducido es: " + txtBuscar.getText());

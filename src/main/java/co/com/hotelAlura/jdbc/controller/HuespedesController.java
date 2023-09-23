@@ -3,7 +3,9 @@ import co.com.hotelAlura.jdbc.dao.HuespedesDAO;
 import co.com.hotelAlura.jdbc.model.HuespedesModel;
 import co.com.hotelAlura.jdbc.model.ReservasModel;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class HuespedesController {
 
@@ -19,4 +21,27 @@ public class HuespedesController {
             e.printStackTrace();
         }
     }
+
+    public List<HuespedesModel> traerTodosHuespedes(){
+        List<HuespedesModel> huespedes = null;
+        try {
+            huespedes = huespedesDAO.obtenerTodosHuespedes();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return huespedes;
+    }
+
+    public List<HuespedesModel> traerHuespedesFiltro(int id){
+        HuespedesDAO huespedesDAO = new HuespedesDAO();
+        List<HuespedesModel> huespedes = new ArrayList<>();
+        try {
+            huespedes = huespedesDAO.obtenerHuespedesFiltro(id);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    return huespedes;
+    }
+
+
 }
