@@ -314,7 +314,6 @@ public class Busqueda extends JFrame {
 			}
 		});
 
-
 		btnbuscar.setLayout(null);
 		btnbuscar.setBackground(new Color(12, 138, 199));
 		btnbuscar.setBounds(748, 125, 122, 35);
