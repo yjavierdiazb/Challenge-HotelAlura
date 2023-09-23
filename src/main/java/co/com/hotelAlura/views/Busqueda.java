@@ -10,6 +10,8 @@ import co.com.hotelAlura.jdbc.dao.ReservaDAO;
 import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.SystemColor;
@@ -36,6 +38,7 @@ public class Busqueda extends JFrame {
 	private JLabel labelAtras;
 	private JLabel labelExit;
 	int xMouse, yMouse;
+	private boolean enPestanaHuespedes = false;
 
 	/**
 	 * Launch the application.
@@ -341,8 +344,68 @@ public class Busqueda extends JFrame {
 		lblEditar.setBounds(0, 0, 122, 35);
 		btnEditar.add(lblEditar);
 
+		//AQUI PONGO EL CODIGO NUEVO
+
+
+
 
 		JPanel btnEliminar = new JPanel();
+
+		// Evento de cambio de pestaña
+		panel.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int selectedTabIndex = panel.getSelectedIndex();
+				// Verifica si se cambió a la pestaña de "Huéspedes"
+				enPestanaHuespedes = (selectedTabIndex == 1);
+				// Deshabilita o habilita el botón "Eliminar" según la pestaña seleccionada
+				btnEliminar.setEnabled(!enPestanaHuespedes);
+			}
+		});
+
+		// Evento de clic en el botón "Eliminar"
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Verifica si estás en la pestaña de "Reservas" antes de intentar eliminar
+				if (!enPestanaHuespedes) {
+					int filaSeleccionada = tbReservas.getSelectedRow();
+					if (filaSeleccionada != -1) {
+						int id = (int) tbReservas.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna 0 contiene el ID de reserva
+						ReservaController reservaController = new ReservaController(new ReservaDAO());
+						reservaController.eliminarReserva(id);
+
+						// Luego, actualiza la tabla para reflejar los cambios
+						List<ReservasModel> reservas = reservaController.traerTodasReservas();
+
+						DefaultTableModel modeloReservas = (DefaultTableModel) tbReservas.getModel();
+						modeloReservas.setRowCount(0); // Limpia todas las filas
+						// Rellenamos
+						for (ReservasModel reserva : reservas) {
+							modeloReservas.addRow(new Object[]{
+									reserva.getId(),
+									reserva.getFechaEntrada(),
+									reserva.getFechaSalida(),
+									reserva.getValor(),
+									reserva.getFormaPago()
+							});
+						}
+					}
+				} else {
+					// Mostrar un mensaje de error si se intenta eliminar en la pestaña de "Huéspedes"
+					JOptionPane.showMessageDialog(btnEliminar, "No puedes eliminar en la pestaña de Huéspedes");
+				}
+			}
+		});
+
+
+		btnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				JOptionPane.showMessageDialog(btnEditar,"Le diste cilck a editar");
+			}
+		});
+
 		btnEliminar.setLayout(null);
 		btnEliminar.setBackground(new Color(12, 138, 199));
 		btnEliminar.setBounds(767, 508, 122, 35);

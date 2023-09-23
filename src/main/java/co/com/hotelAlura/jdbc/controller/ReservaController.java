@@ -26,6 +26,14 @@ public class ReservaController {
         }
     }
 
+    public void eliminarReserva(int id) {
+        ReservaDAO reservaDAO = new ReservaDAO();
+        try {
+            reservaDAO.eliminarReserva(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<ReservasModel> traerTodasReservas(){
         List<ReservasModel> reservas = null;
