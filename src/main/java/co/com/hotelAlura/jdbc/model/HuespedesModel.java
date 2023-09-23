@@ -31,6 +31,9 @@ public class HuespedesModel {
         return id_reserva;
     }
 
+    public void setId_reserva(int id_reserva) {
+        this.id_reserva = id_reserva;
+    }
     public String getNombre() {
         return nombre;
     }

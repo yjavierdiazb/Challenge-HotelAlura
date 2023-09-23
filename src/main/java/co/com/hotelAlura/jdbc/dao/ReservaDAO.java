@@ -1,6 +1,7 @@
 package co.com.hotelAlura.jdbc.dao;
 
 import co.com.hotelAlura.jdbc.factory.ConnectionFactory;
+import co.com.hotelAlura.jdbc.model.HuespedesModel;
 import co.com.hotelAlura.jdbc.model.ReservasModel;
 import java.util.ArrayList;
 
@@ -86,6 +87,61 @@ public class ReservaDAO {
         }
         return reservas;
     }
+
+
+
+    public List<HuespedesModel> obtenerTodosHuespedes() throws SQLException{
+        String sql = "SELECT * FROM huespedes";
+        List<HuespedesModel> huespedes = new ArrayList<>();
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)){
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()){
+                    HuespedesModel huesped = new HuespedesModel();
+                    huesped.setId(resultSet.getInt("id"));
+                    huesped.setNombre(resultSet.getString("nombre"));
+                    huesped.setApellido(resultSet.getString("apellido"));
+                    huesped.setFecha_nacimiento(resultSet.getDate("fecha_nacimiento"));
+                    huesped.setNacionalidad(resultSet.getString("nacionalidad"));
+                    huesped.setTelefono(resultSet.getString("telefono"));
+                    huesped.setId_reserva(resultSet.getInt("id_reserva"));
+                    huespedes.add(huesped);
+                }
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        return huespedes;
+    }
+
+    public List<HuespedesModel> obtenerHuespedesFiltro(int id) throws SQLException{
+        String sql = "SELECT * FROM huespedes WHERE id = ?";
+        List<HuespedesModel> huespedes = new ArrayList<>();
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)){
+            statement.setInt(1,id);
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()) {
+                    HuespedesModel huesped = new HuespedesModel();
+                    huesped.setId(resultSet.getInt("id"));
+                    huesped.setNombre(resultSet.getString("nombre"));
+                    huesped.setApellido(resultSet.getString("apellido"));
+                    huesped.setFecha_nacimiento(resultSet.getDate("fecha_nacimiento"));
+                    huesped.setNacionalidad(resultSet.getString("nacionalidad"));
+                    huesped.setTelefono(resultSet.getString("telefono"));
+                    huesped.setId_reserva(resultSet.getInt("id_reserva"));
+                    huespedes.add(huesped);
+                }
+            }
+        }
+        return huespedes;
+    }
+
+
+
+
 
 
 
