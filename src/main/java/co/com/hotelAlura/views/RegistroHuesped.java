@@ -308,8 +308,8 @@ public class RegistroHuesped extends JFrame {
 
 				dispose(); //Cierra la ventana actual
 
-				MenuPrincipal menuPrincipal = new MenuPrincipal();
-				menuPrincipal.setVisible(true);
+				MenuUsuario menuUsuario = new MenuUsuario();
+				menuUsuario.setVisible(true);
 			}
 		});
 
