@@ -244,7 +244,7 @@ public class Busqueda extends JFrame {
 						// Crear una instancia de ReservaController
 						ReservaController reservaController = new ReservaController(new ReservaDAO());
 
-						// Llamar al método traerTodasReservas() en la instancia
+						// Llamar al método traerReservasFiltro() en la instancia
 						int id = Integer.parseInt(txtBuscar.getText());
 						List<ReservasModel> reservas = reservaController.traerReservasFiltro(id);
 
@@ -286,13 +286,33 @@ public class Busqueda extends JFrame {
 						}
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"El huesped introducido es: " + txtBuscar.getText());
+						// Crear una instancia de HuespedesController
+						HuespedesController huespedesController = new HuespedesController(new HuespedesDAO());
+
+						// Llamar al método traerHuespedesFiltro() en la instancia
+						int id = Integer.parseInt(txtBuscar.getText());
+						List<HuespedesModel> huespedes = huespedesController.traerHuespedesFiltro(id);
+
+						DefaultTableModel modeloHuespedes = (DefaultTableModel) tbHuespedes.getModel();
+						modeloHuespedes.setRowCount(0); //limpia todas las filas
+						//Rellenamos
+						for(HuespedesModel huesped : huespedes){
+							modeloHuespedes.addRow(new Object[]{
+									huesped.getId(),
+									huesped.getNombre(),
+									huesped.getApellido(),
+									huesped.getFecha_nacimiento(),
+									huesped.getNacionalidad(),
+									huesped.getTelefono(),
+									huesped.getId_reserva()
+							});
+						}
+
 					}
 				}
 
 			}
 		});
-
 
 
 		btnbuscar.setLayout(null);
