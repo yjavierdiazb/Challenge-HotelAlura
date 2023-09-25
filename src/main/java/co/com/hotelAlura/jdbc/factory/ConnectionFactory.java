@@ -14,7 +14,7 @@ public class ConnectionFactory {
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         cpds.setJdbcUrl("jdbc:mysql://localhost:3306/hotel_alura");
         cpds.setUser("root");
-        cpds.setPassword("8619975yY*");
+        cpds.setPassword("alura2389");
 
         dataSource = cpds;
     }
